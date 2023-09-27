@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modulo 3</title>
+    <title>Modulo 2</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css">
 </head>
@@ -78,12 +78,39 @@
         <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                   
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="miModalLabel">Registro</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo electrónico:</label>
+                                <input type="email" class="form-control" id="email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="contrasena">Contraseña:</label>
+                                <input type="password" class="form-control" id="contrasena" name="contrasena">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary">Registrar</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <button class="btn btn-primary" id="abrirModalBtn" type="button">Abrir Modal</button>
+        <button class="btn btn-primary" id="abrirModalBtn" type="button" data-toggle="modal" data-target="#miModal">
+            Abrir Modal
+        </button>
 
         <div id="miCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -119,9 +146,23 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
-        function mostrarModal() {
-            $('#miModal').modal('show');
-        }
+        $(document).ready(function () {
+            $('#miModal').on('show.bs.modal', function () {
+                $('#abrirModalBtn').prop('disabled', true);
+                $('#abrirModalBtn').removeClass('btn-primary').addClass('btn-secondary');
+            });
+
+            $('#miModal').on('shown.bs.modal', function () {
+            });
+
+            $('#miModal').on('hide.bs.modal', function () {
+            });
+
+            $('#miModal').on('hidden.bs.modal', function () {
+                $('#abrirModalBtn').prop('disabled', false);
+                $('#abrirModalBtn').removeClass('btn-secondary').addClass('btn-primary');
+            });
+        });
 
         function cambiarVelocidadCarousel(velocidad) {
             $('#miCarousel').carousel({
@@ -129,16 +170,12 @@
             });
         }
 
-        $('#abrirModalBtn').click(function () {
-            mostrarModal();
-        });
-
         $('#velocidadNormal').click(function () {
-            cambiarVelocidadCarousel(3000); // 3 segundos
+            cambiarVelocidadCarousel(3000);
         });
 
         $('#velocidadRapida').click(function () {
-            cambiarVelocidadCarousel(1000); // 1 segundo
+            cambiarVelocidadCarousel(1000);
         });
     </script>
 </body>

@@ -1,0 +1,14 @@
+$color-amarillo: #FFFF00;
+$color-rojo: #FF0000;
+$color-verde: #00FF00;
+
+@mixin estilos-comunes {
+    margin: 10px;
+    padding: 5px;
+    background-color: $color-amarillo;
+}
+
+.elemento {
+    @include estilos-comunes;
+    color: $color-rojo;
+}
